@@ -1,0 +1,34 @@
+{
+  "name": "laximo/guayaquillib",
+  "description": "Laximo.CAT, Laximo.DOC SDK",
+  "keywords": [
+    "Laximo",
+    "Laximo.CAT",
+    "Laximo.OEM",
+    "Laximo.AM",
+    "Laximo.DOC",
+    "Laximo.Aftermarket",
+    "guayaquillib"
+  ],
+  "homepage": "https://laximo.ru/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "laximo.ru",
+      "email": "support@laximo.ru",
+      "homepage": "https://laximo.ru/",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GuayaquilLib\\": "src/"
+    }
+  },
+  "require-dev": {},
+  "require": {
+    "ext-simplexml": "*",
+    "ext-soap": "*",
+    "php": ">=7.1"
+  }
+}

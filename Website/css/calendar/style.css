@@ -1,0 +1,261 @@
+
+.crm-calendar.row {
+  width: 100%; }
+.crm-calendar.weekends {
+  color: blue; }
+.crm-calendar.width {
+  width: 150px; }
+.crm-calendar.day {
+  border: 1px solid blue;
+  margin: 2px;
+  border-radius: 3px;
+  height: 80px;
+  cursor: pointer; }
+  .crm-calendar.day.empty {
+    border: 1px solid grey;
+    cursor: default; }
+    .crm-calendar.day.empty:hover {
+      background: none; }
+  .crm-calendar.day.current {
+    background: #c5c5c5; }
+  .crm-calendar.day:hover {
+    background: #c5c5c5; }
+.crm-calendar.header {
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  border: none;
+  height: 30px; }
+  .crm-calendar.header > p {
+    padding: 0;
+    margin: 0; }
+  .crm-calendar.header:hover {
+    background: none;
+    cursor: default; }
+.crm-calendar.date {
+  font-size: 13px;
+  text-align: right;
+  padding-right: 5px; }
+.crm-calendar.event {
+  background: #dcffb5;
+  border: 1px solid #5fb500;
+  border-radius: 2px;
+  margin: 2px;
+  padding: 2px;
+  color: #000;
+  font-size: 13px; }
+.crm-calendar.comment {
+  color: #000;
+  font-size: 12px; }
+.crm-calendar > p {
+  padding: 0;
+  margin: 0; }
+
+.crm-desk * > p, .crm-desk h1, .crm-desk h2, .crm-desk h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em; }
+.crm-desk.column {
+  width: calc(95%/4); }
+.crm-desk.header p, .crm-desk.header h1, .crm-desk.header h2, .crm-desk.header h3 {
+  text-align: center; }
+.crm-desk.plate {
+  width: 100%;
+  background: #c5c5c5;
+  border: 1px solid blue;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  padding-top: 5px;
+  padding-right: 7px;
+  padding-bottom: 4px;
+  padding-left: 4px; }
+.crm-desk * > h3 {
+  font-size: 1em;
+  font-weight: 600; }
+.crm-desk * > hr {
+  height: 2px;
+  border: none;
+  color: gray;
+  background-color: gray; }
+
+.crm-desk-list {
+  padding-top: 3px;
+  padding-left: 5px; }
+  .crm-desk-list :hover {
+    cursor: pointer; }
+  .crm-desk-list .crm-shadow {
+    border: 1px solid black;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.5); }
+  .crm-desk-list * > p, .crm-desk-list h1, .crm-desk-list h2, .crm-desk-list h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+    font-family: calibri; }
+  .crm-desk-list > hr {
+    margin: 0;
+    padding: 0;
+    height: 1px;
+    border: none;
+    color: gray;
+    background-color: gray; }
+  .crm-desk-list.task {
+    margin-top: 5px;
+    margin-bottom: 10px; }
+    .crm-desk-list.task.date {
+      width: 20%;
+      font-size: 0.9em; }
+    .crm-desk-list.task.title {
+      width: 40%;
+      font-size: 0.9em; }
+    .crm-desk-list.task.description {
+      width: 40%;
+      font-size: 0.9em; }
+
+.crm-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .crm-menu ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px; }
+
+.crm-day {
+  width: 100%;
+  height: 100%; }
+  .crm-day * {
+    margin: 0;
+    padding: 0; }
+  .crm-day .event {
+    background: rgba(255, 192, 203, 0.5);
+    width: 100px;
+    height: 39px; }
+  .crm-day .arrow {
+    width: 30px; }
+    .crm-day .arrow .time-row {
+      height: 40px;
+      width: 100%; }
+    .crm-day .arrow * > p {
+      font-size: 10px;
+      margin-top: -8px;
+      text-align: center; }
+  .crm-day .time {
+    width: 100%; }
+    .crm-day .time .time-row {
+      height: 20px; }
+      .crm-day .time .time-row:nth-child(2n+1) {
+        border-top: 1px solid black; }
+      .crm-day .time .time-row:nth-child(2n) {
+        border-top: 1px dashed  black; }
+      .crm-day .time .time-row:last-child {
+        border-bottom: 1px solid black; }
+
+.crm-week {
+  width: 100%; }
+  .crm-week .header {
+    height: 30px;
+    width: calc(100%/7);
+    text-align: center; }
+  .crm-week .arrow {
+    width: 30px; }
+    .crm-week .arrow .time-row {
+      height: 40px;
+      width: 100%; }
+    .crm-week .arrow * > p {
+      font-size: 10px;
+      margin-top: -8px;
+      text-align: center; }
+  .crm-week .weekday {
+    height: 100%;
+    width: calc(100%/7);
+    border-right: 1px dotted black; }
+    .crm-week .weekday:last-child {
+      border-right: none; }
+    .crm-week .weekday .time-row {
+      height: 20px; }
+      .crm-week .weekday .time-row:nth-child(2n+1) {
+        border-top: 1px solid black; }
+      .crm-week .weekday .time-row:nth-child(2n) {
+        border-top: 1px dashed  black; }
+      .crm-week .weekday .time-row:last-child {
+        border-bottom: 1px solid black; }
+
+.flex {
+  display: flex; }
+  .flex.horizon.center {
+    justify-content: center; }
+  .flex.horizon.space {
+    justify-content: space-around; }
+  .flex.horizon.space-b {
+    justify-content: space-between; }
+  .flex.horizon.between {
+    justify-content: space-between; }
+  .flex.vertical.center {
+    align-items: center; }
+  .flex.column {
+    flex-direction: column; }
+
+form * > label {
+  margin: 0;
+  font-size: 0.8em; }
+form * > input::-webkit-input-placeholder, form select::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: pink;
+  font-size: 0.8em; }
+form * > input::-moz-placeholder, form select::-moz-placeholder {
+  /* Firefox 19+ */
+  color: pink;
+  font-size: 0.8em; }
+form * > input:-ms-input-placeholder, form select:-ms-input-placeholder {
+  /* IE 10+ */
+  color: pink;
+  font-size: 0.8em; }
+form * > input:-moz-placeholder, form select:-moz-placeholder {
+  /* Firefox 18- */
+  color: pink;
+  font-size: 0.8em; }
+
+.calendar-popup {
+  display: none;
+  background: rgba(179, 255, 116, 0.5);
+  border: 1px solid;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 100px;
+  padding: 10px; }
+  .calendar-popup > p {
+    color: #5fb500; }
+  .calendar-popup.danger {
+    background: rgba(255, 51, 59, 0.3); }
+
+#menu-top-level-2 {
+  margin-bottom: 10px; }
+  #menu-top-level-2 * {
+    padding: 0;
+    margin: 0; }
+  #menu-top-level-2 ul {
+    list-style: none; }
+    #menu-top-level-2 ul li {
+      margin-right: 5px; }
+    #menu-top-level-2 ul a {
+      display: block;
+      padding: 5px;
+      text-decoration: none;
+      border-bottom: 2px solid white; }
+      #menu-top-level-2 ul a.active {
+        border-bottom: 2px solid #c5c5c5; }
+      #menu-top-level-2 ul a:hover {
+        cursor: pointer;
+        border-bottom: 2px solid #c5c5c5; }
+
+
+
+
+/*# sourceMappingURL=style.css.map */

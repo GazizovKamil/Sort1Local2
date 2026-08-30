@@ -1,0 +1,34 @@
+<Project Sdk="Peachpie.NET.Sdk/1.2.0-r17054">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>PhpProject</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CommonCompileExclude>obj/**;bin/**;vendor/**/test/**;vendor/**/tests/**;vendor/**/phpstan/**;vendor/**/PHPStan/**;vendor/**/phpunit/**;vendor/**/PHPUnit/**;vendor/jms/serializer/src/Twig/**;vendor/sanmai/cdek-sdk/src/LaravelCdekServiceProvider.php;vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/Trend/**;vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php;vendor/myclabs/php-enum/stubs/Stringable.php;api/vendor/**;api/classes/Components/ExcelToBase.php;</CommonCompileExclude>
+    <LinuxCompileExclude>vendor/jms/**;vendor/doctrine/**;vendor/laximo/guayaquillib/**;vendor/sanmai/**;vendor/guzzlehttp/**;vendor/maennchen/zipstream-php/**;vendor/psr/http-client/**;vendor/psr/http-message/**;vendor/psr/http-factory/**;vendor/symfony/polyfill-php80/Resources/stubs/PhpToken.php;vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xml.php;vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Calculation/Financial/**;vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Memory/SimpleCache1.php;vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Collection/Memory/SimpleCache3.php;</LinuxCompileExclude>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile
+      Include="**/*.php"
+      Exclude="$(CommonCompileExclude);$(LinuxCompileExclude)"
+      Condition="'$([MSBuild]::IsOSPlatform(`Linux`))' == 'true'" />
+    <Compile
+      Include="**/*.php"
+      Exclude="$(CommonCompileExclude)"
+      Condition="'$([MSBuild]::IsOSPlatform(`Linux`))' != 'true'" />
+    <Content
+      Include="**"
+      Exclude="**/*.php;obj/**;bin/**;*.msbuildproj;.vscode/**;.vs/**;">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <None Remove="**" />
+  </ItemGroup>
+</Project>

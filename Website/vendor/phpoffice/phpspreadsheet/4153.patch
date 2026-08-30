@@ -1,0 +1,267 @@
+From 367c22c67e96339c6cfb8b1997b1fbdc18808b67 Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Fri, 30 Aug 2024 00:40:02 -0700
+Subject: [PATCH 1/6] Slight Improvement to PR #4132
+
+PR #4132 was needed for release 2.2.2 because of a problem with Excel 2016 introduced with 2.2.0. This is a minor tweak to that change - a little simpler, and possibly beneficial if the spreadsheet uses split screens.
+---
+ src/PhpSpreadsheet/Worksheet/Worksheet.php | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/src/PhpSpreadsheet/Worksheet/Worksheet.php b/src/PhpSpreadsheet/Worksheet/Worksheet.php
+index d089adde1e..ab2f0a60ac 100644
+--- a/src/PhpSpreadsheet/Worksheet/Worksheet.php
++++ b/src/PhpSpreadsheet/Worksheet/Worksheet.php
+@@ -3724,10 +3724,8 @@ public function applyStylesFromArray(string $coordinate, array $styleArray): boo
+         }
+         $activeSheetIndex = $spreadsheet->getActiveSheetIndex();
+         $originalSelected = $this->selectedCells;
+-        $originalActive = $this->activeCell;
+         $this->getStyle($coordinate)->applyFromArray($styleArray);
+-        $this->activeCell = $originalActive;
+-        $this->selectedCells = $originalSelected;
++        $this->setSelectedCells($originalSelected);
+         if ($activeSheetIndex >= 0) {
+             $spreadsheet->setActiveSheetIndex($activeSheetIndex);
+         }
+
+From c11524d1a5ef94013e13271ec17145a10acf92ff Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Fri, 30 Aug 2024 12:21:46 -0700
+Subject: [PATCH 2/6] Performance Problem With Some Spreadsheets
+
+---
+ src/PhpSpreadsheet/Cell/Cell.php              | 16 +++-
+ .../Worksheet/ApplyStylesTest.php             | 77 +++++++++++++++++++
+ 2 files changed, 92 insertions(+), 1 deletion(-)
+ create mode 100644 tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
+
+diff --git a/src/PhpSpreadsheet/Cell/Cell.php b/src/PhpSpreadsheet/Cell/Cell.php
+index c976d4df9e..67e36177f8 100644
+--- a/src/PhpSpreadsheet/Cell/Cell.php
++++ b/src/PhpSpreadsheet/Cell/Cell.php
+@@ -318,7 +318,21 @@ public function setValueExplicit(mixed $value, string $dataType = DataType::TYPE
+         $this->updateInCollection();
+         $cellCoordinate = $this->getCoordinate();
+         self::updateIfCellIsTableHeader($this->getParent()?->getParent(), $this, $oldValue, $value);
+-        $this->getWorksheet()->applyStylesFromArray($cellCoordinate, ['quotePrefix' => $quotePrefix]);
++        $worksheet = $this->getWorksheet();
++        $spreadsheet = $worksheet->getParent();
++        $originalSelected = $worksheet->getSelectedCells();
++        if (isset($spreadsheet)) {
++            $activeSheetIndex = $spreadsheet->getActiveSheetIndex();
++            $style = $this->getStyle();
++            $oldQuotePrefix = $style->getQuotePrefix();
++            if ($oldQuotePrefix != $quotePrefix) {
++                $style->setQuotePrefix($quotePrefix);
++            }
++            $worksheet->setSelectedCells($originalSelected);
++            if ($activeSheetIndex >= 0) {
++                $spreadsheet->setActiveSheetIndex($activeSheetIndex);
++            }
++        }
+ 
+         return $this->getParent()?->get($cellCoordinate) ?? $this;
+     }
+diff --git a/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php b/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
+new file mode 100644
+index 0000000000..5f7f3f3e0e
+--- /dev/null
++++ b/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
+@@ -0,0 +1,77 @@
++<?php
++
++declare(strict_types=1);
++
++namespace PhpOffice\PhpSpreadsheetTests\Worksheet;
++
++use PhpOffice\PhpSpreadsheet\Spreadsheet;
++use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
++use PHPUnit\Framework\TestCase;
++
++class ApplyStylesTest extends TestCase
++{
++    public function testApplyFromArray(): void
++    {
++        $spreadsheet = new Spreadsheet();
++        $sheet1 = $spreadsheet->getActiveSheet();
++        $sheet2 = $spreadsheet->createSheet();
++        $sheet3 = $spreadsheet->createSheet();
++        $cell = 'B4';
++        $sheet1->getCell($cell)->setValue('first');
++        $sheet1->getStyle($cell)->getFont()->setName('Arial');
++        $cell = 'C9';
++        $sheet2->getCell($cell)->setValue('second');
++        $sheet2->getStyle($cell)->getFont()->setName('Arial');
++        $cell = 'A6';
++        $sheet3->getCell($cell)->setValue('third');
++        $sheet3->getStyle($cell)->getFont()->setName('Arial');
++        self::assertSame(2, $spreadsheet->getActiveSheetIndex());
++        self::assertSame('B4', $sheet1->getSelectedCells());
++        self::assertSame('C9', $sheet2->getSelectedCells());
++        self::assertSame('A6', $sheet3->getSelectedCells());
++        $cell = 'D12';
++        $styleArray = ['font' => ['name' => 'Courier New']];
++        $sheet2->getStyle('D12')->applyFromArray($styleArray);
++        self::assertSame(1, $spreadsheet->getActiveSheetIndex());
++        self::assertSame('B4', $sheet1->getSelectedCells());
++        self::assertSame('D12', $sheet2->getSelectedCells());
++        self::assertSame('A6', $sheet3->getSelectedCells());
++        $spreadsheet->disconnectWorksheets();
++    }
++
++    public function testApplyStylesFromArray(): void
++    {
++        $spreadsheet = new Spreadsheet();
++        $sheet1 = $spreadsheet->getActiveSheet();
++        $sheet2 = $spreadsheet->createSheet();
++        $sheet3 = $spreadsheet->createSheet();
++        $cell = 'B4';
++        $sheet1->getCell($cell)->setValue('first');
++        $sheet1->getStyle($cell)->getFont()->setName('Arial');
++        $cell = 'C9';
++        $sheet2->getCell($cell)->setValue('second');
++        $sheet2->getStyle($cell)->getFont()->setName('Arial');
++        $cell = 'A6';
++        $sheet3->getCell($cell)->setValue('third');
++        $sheet3->getStyle($cell)->getFont()->setName('Arial');
++        self::assertSame(2, $spreadsheet->getActiveSheetIndex());
++        self::assertSame('B4', $sheet1->getSelectedCells());
++        self::assertSame('C9', $sheet2->getSelectedCells());
++        self::assertSame('A6', $sheet3->getSelectedCells());
++        $cell = 'D12';
++        $styleArray = ['font' => ['name' => 'Courier New']];
++        $sheet2->applyStylesFromArray($cell, ['font' => ['name' => 'Courier New']]);
++        self::assertSame(2, $spreadsheet->getActiveSheetIndex(), 'should be unchanged');
++        self::assertSame('B4', $sheet1->getSelectedCells(), 'should be unchanged');
++        self::assertSame('C9', $sheet2->getSelectedCells(), 'should be unchanged');
++        self::assertSame('A6', $sheet3->getSelectedCells(), 'should be unchanged');
++        $spreadsheet->disconnectWorksheets();
++    }
++
++    public function testNoSpreadsheet(): void
++    {
++        $sheet2 = new Worksheet();
++        $cell = 'D12';
++        self::assertFalse($sheet2->applyStylesFromArray($cell, ['font' => ['name' => 'Courier New']]));
++    }
++}
+
+From 8249cbd375a3e0d372df58dfdc7c3e92fde8a1d6 Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Fri, 30 Aug 2024 12:45:34 -0700
+Subject: [PATCH 3/6] Scrutinizer
+
+---
+ tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php b/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
+index 5f7f3f3e0e..f6811fb2b2 100644
+--- a/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
++++ b/tests/PhpSpreadsheetTests/Worksheet/ApplyStylesTest.php
+@@ -31,7 +31,7 @@ public function testApplyFromArray(): void
+         self::assertSame('A6', $sheet3->getSelectedCells());
+         $cell = 'D12';
+         $styleArray = ['font' => ['name' => 'Courier New']];
+-        $sheet2->getStyle('D12')->applyFromArray($styleArray);
++        $sheet2->getStyle($cell)->applyFromArray($styleArray);
+         self::assertSame(1, $spreadsheet->getActiveSheetIndex());
+         self::assertSame('B4', $sheet1->getSelectedCells());
+         self::assertSame('D12', $sheet2->getSelectedCells());
+@@ -60,7 +60,7 @@ public function testApplyStylesFromArray(): void
+         self::assertSame('A6', $sheet3->getSelectedCells());
+         $cell = 'D12';
+         $styleArray = ['font' => ['name' => 'Courier New']];
+-        $sheet2->applyStylesFromArray($cell, ['font' => ['name' => 'Courier New']]);
++        $sheet2->applyStylesFromArray($cell, $styleArray);
+         self::assertSame(2, $spreadsheet->getActiveSheetIndex(), 'should be unchanged');
+         self::assertSame('B4', $sheet1->getSelectedCells(), 'should be unchanged');
+         self::assertSame('C9', $sheet2->getSelectedCells(), 'should be unchanged');
+
+From 60ca6c787cd9832321d51b0680d69ef1eb5a7468 Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Fri, 30 Aug 2024 15:13:04 -0700
+Subject: [PATCH 4/6] Very Minor Tweak
+
+---
+ src/PhpSpreadsheet/Cell/Cell.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/PhpSpreadsheet/Cell/Cell.php b/src/PhpSpreadsheet/Cell/Cell.php
+index 67e36177f8..e8e9afa716 100644
+--- a/src/PhpSpreadsheet/Cell/Cell.php
++++ b/src/PhpSpreadsheet/Cell/Cell.php
+@@ -320,12 +320,12 @@ public function setValueExplicit(mixed $value, string $dataType = DataType::TYPE
+         self::updateIfCellIsTableHeader($this->getParent()?->getParent(), $this, $oldValue, $value);
+         $worksheet = $this->getWorksheet();
+         $spreadsheet = $worksheet->getParent();
+-        $originalSelected = $worksheet->getSelectedCells();
+         if (isset($spreadsheet)) {
++            $originalSelected = $worksheet->getSelectedCells();
+             $activeSheetIndex = $spreadsheet->getActiveSheetIndex();
+             $style = $this->getStyle();
+             $oldQuotePrefix = $style->getQuotePrefix();
+-            if ($oldQuotePrefix != $quotePrefix) {
++            if ($oldQuotePrefix !== $quotePrefix) {
+                 $style->setQuotePrefix($quotePrefix);
+             }
+             $worksheet->setSelectedCells($originalSelected);
+
+From 16e557350fb171eb0f7bebf06cbfafa71717411d Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Sat, 31 Aug 2024 03:12:44 -0700
+Subject: [PATCH 5/6] Small Optimization
+
+---
+ src/PhpSpreadsheet/Reader/Xlsx.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/PhpSpreadsheet/Reader/Xlsx.php b/src/PhpSpreadsheet/Reader/Xlsx.php
+index bcf2459739..2d29f8085f 100644
+--- a/src/PhpSpreadsheet/Reader/Xlsx.php
++++ b/src/PhpSpreadsheet/Reader/Xlsx.php
+@@ -947,16 +947,16 @@ protected function loadSpreadsheetFromFile(string $filename): Spreadsheet
+ 
+                                             // Style information?
+                                             if (!$this->readDataOnly) {
+-                                                $holdSelected = $docSheet->getSelectedCells();
+                                                 $cAttrS = (int) ($cAttr['s'] ?? 0);
+                                                 // no style index means 0, it seems
+                                                 $cAttrS = isset($styles[$cAttrS]) ? $cAttrS : 0;
+                                                 $cell->setXfIndex($cAttrS);
+                                                 // issue 3495
+                                                 if ($cellDataType === DataType::TYPE_FORMULA && $styles[$cAttrS]->quotePrefix === true) {
++                                                    $holdSelected = $docSheet->getSelectedCells();
+                                                     $cell->getStyle()->setQuotePrefix(false);
++                                                    $docSheet->setSelectedCells($holdSelected);
+                                                 }
+-                                                $docSheet->setSelectedCells($holdSelected);
+                                             }
+                                         }
+                                         ++$rowIndex;
+
+From b3769577b6256b975af5fa829df5071389316dc9 Mon Sep 17 00:00:00 2001
+From: oleibman <10341515+oleibman@users.noreply.github.com>
+Date: Wed, 4 Sep 2024 19:33:32 -0700
+Subject: [PATCH 6/6] Update CHANGELOG.md
+
+---
+ CHANGELOG.md | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index fd9b9e9260..9de367a5cb 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -29,7 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org).
+ 
+ ### Fixed
+ 
+-- Nothing yet.
++- Xls Reader Some Ranges Not Handled Properly. [Issue #1570](https://github.com/PHPOffice/PhpSpreadsheet/issues/1570) [PR #4140](https://github.com/PHPOffice/PhpSpreadsheet/pull/4140)
++- Better Handling of legacyDrawing Xml. [Issue #4105](https://github.com/PHPOffice/PhpSpreadsheet/issues/4105) [PR #4122](https://github.com/PHPOffice/PhpSpreadsheet/pull/4122)
++-  Improve Xlsx Reader Speed. [Issue #3917](https://github.com/PHPOffice/PhpSpreadsheet/issues/3917) [PR #4153](https://github.com/PHPOffice/PhpSpreadsheet/pull/4153)
+ 
+ ## 2024-08-07 - 2.2.2
+ 

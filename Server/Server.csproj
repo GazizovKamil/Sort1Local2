@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Peachpie.AspNetCore.Web" Version="1.2.0-r17054" />
+    <PackageReference Include="PeachPie.Library.MySql" Version="1.2.0-r17054" />
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
+    <ProjectReference Include="..\Website\Website.msbuildproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,378 @@
+
+
+//Стили месяца
+.crm-calendar {
+  &.row {
+    width: 100%;
+  }
+  &.weekends {
+    color: blue;
+  }
+  &.width {
+    width: 150px;
+  }
+  &.day {
+    border: 1px solid blue;
+    margin: 2px;
+    border-radius: 3px;
+    height: 80px;
+    cursor: pointer;
+    &.empty{
+      border: 1px solid grey;
+      cursor: default;
+      &:hover {
+        background: none;
+      }
+    }
+    &.current {
+      background: #c5c5c5;
+    }
+    &:hover {
+      background: #c5c5c5;
+    }
+  }
+  &.header {
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    border: none;
+    height: 30px;
+    > p {
+      padding: 0;
+      margin: 0;
+    }
+    &:hover {
+      background: none;
+      cursor: default;
+    }
+  }
+  &.date {
+    font-size: 13px;
+    text-align: right;
+    padding-right: 5px;
+  }
+  &.event {
+    $color: #dcffb5;
+    $color2: darken($color,50%);
+    background: $color;
+    border: 1px solid $color2;
+    border-radius: 2px;
+    margin: 2px;
+    padding: 2px;
+    color: #000;
+    font-size: 13px;
+  }
+  &.comment {
+    color: #000;
+    font-size: 12px;
+  }
+
+  > p {
+    padding: 0;
+    margin: 0;
+  }
+
+}
+
+//Стили рабочего стола
+.crm-desk {
+  * > p, h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+  }
+  &.column {
+    width: calc(95%/4);
+  }
+  &.header {
+    p, h1, h2, h3 {
+      text-align: center;
+    }
+  }
+  &.plate {
+    width: 100%;
+    background: #c5c5c5;
+    border: 1px solid blue;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-right: 7px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+  }
+  * > h3 {
+    font-size: 1em;
+    font-weight: 600;
+  }
+  * > hr {
+    height:2px;
+    border:none;
+    color:gray;
+    background-color:gray;
+  }
+}
+
+.crm-desk-list {
+  padding-top: 3px;
+  padding-left: 5px;
+  :hover {
+    cursor: pointer;
+  }
+  .crm-shadow {
+    border: 1px solid black;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+  }
+  * > p, h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+    font-family: calibri;
+  }
+  > hr {
+    margin: 0;
+    padding: 0;
+    height:1px;
+    border:none;
+    color:gray;
+    background-color:gray;
+  }
+  &.task {
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+    &.date{
+      width: 20%;
+      font-size: 0.9em
+    }
+    &.title {
+      width: 40%;
+      font-size: 0.9em
+    }
+    &.description{
+      width: 40%;
+      font-size: 0.9em
+    }
+  }
+
+}
+
+.crm-menu {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+  }
+
+}
+
+.crm-day {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .event {
+    background: rgba(pink, 0.5);
+    width: 100px;
+    height: 39px;
+  }
+
+  width: 100%;
+  height: 100%;
+  .arrow {
+    width: 30px;
+    .time-row {
+      height: 40px;
+      width: 100%;
+    }
+    * > p {
+      font-size: 10px;
+      margin-top: -8px;
+      text-align: center;
+    }
+  }
+  .time {
+    width: 100%;
+    //width: calc(100% - 30px);
+    .time-row {
+      height: 20px;
+      &:nth-child(2n+1){
+        border-top: 1px solid black;
+      }
+      &:nth-child(2n){
+        border-top: 1px dashed  black;
+      }
+      &:last-child {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
+
+.crm-week {
+  width: 100%;
+  .header {
+    height: 30px;
+    width: calc(100%/7);
+    text-align: center;
+  }
+
+  .arrow {
+    width: 30px;
+    .time-row {
+      height: 40px;
+      width: 100%;
+    }
+    * > p {
+      font-size: 10px;
+      margin-top: -8px;
+      text-align: center;
+    }
+  }
+  .weekday{
+    height: 100%;
+    width: calc(100%/7);
+    //background: #bfc599;
+    border-right: 1px dotted black;
+    &:last-child {
+      border-right: none;
+    }
+    .time-row {
+      height: 20px;
+      &:nth-child(2n+1){
+        border-top: 1px solid black;
+      }
+      &:nth-child(2n){
+        border-top: 1px dashed  black;
+      }
+      &:last-child {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  &.horizon {
+    &.center{
+      justify-content:center;
+    }
+    &.space {
+      justify-content: space-around;
+    }
+    &.space-b {
+      justify-content: space-between;
+    }
+    &.between {
+      justify-content: space-between;
+    }
+  }
+
+  &.vertical {
+    &.center {
+      align-items: center;
+    }
+  }
+
+  &.column {
+    flex-direction: column;
+  }
+
+}
+
+form {
+  * > label {
+      margin: 0;
+      font-size: 0.8em;
+  }
+  * > input, select {
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: pink;
+      font-size: 0.8em;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: pink;
+      font-size: 0.8em;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: pink;
+      font-size: 0.8em;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: pink;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.calendar-popup {
+  $color: rgba(179, 255, 116, 1);
+  display: none;
+  background: rgba(179, 255, 116, 0.5);
+  > p {
+    color: #5fb500;
+  }
+  border: 1px solid;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  &.danger {
+    background: rgba(255, 51, 59, 0.3);
+  }
+}
+
+#menu-top-level-2{
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  margin-bottom: 10px;
+  ul {
+    list-style: none;
+    li {
+      margin-right: 5px;
+    }
+    a {
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+        border-bottom: 2px solid white;
+        &.active {
+          border-bottom: 2px solid #c5c5c5;
+        }
+        &:hover {
+          cursor:pointer;
+          border-bottom: 2px solid #c5c5c5;
+        }
+      }
+  }
+}
+
+#addFormView {
+  display: flex;
+  position: fixed;
+  bottom: 100px;
+  .form-add-event {
+    width: 50%;
+    height: 200px;
+  }
+  textarea {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+

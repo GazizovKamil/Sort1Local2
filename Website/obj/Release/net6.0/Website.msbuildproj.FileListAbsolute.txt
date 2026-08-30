@@ -1,0 +1,14 @@
+/home/kamil/PhpProject/Website/bin/Release/net6.0/PhpProject.deps.json
+/home/kamil/PhpProject/Website/bin/Release/net6.0/PhpProject.dll
+/home/kamil/PhpProject/Website/bin/Release/net6.0/PhpProject.pdb
+/home/kamil/PhpProject/Website/obj/Release/net6.0/Website.msbuildproj.AssemblyReference.cache
+/home/kamil/PhpProject/Website/obj/Release/net6.0/Website.msbuildproj.CoreCompileInputs.cache
+/home/kamil/PhpProject/Website/obj/Release/net6.0/PhpProject.dll
+/home/kamil/PhpProject/Website/obj/Release/net6.0/PhpProject.pdb
+C:\Users\Kamil\Desktop\PhpProject\Website\obj\Release\net6.0\Website.msbuildproj.AssemblyReference.cache
+C:\Users\Kamil\Desktop\PhpProject\Website\obj\Release\net6.0\Website.msbuildproj.CoreCompileInputs.cache
+C:\Users\Kamil\Desktop\PhpProject\Website\obj\Release\net6.0\PhpProject.dll
+C:\Users\Kamil\Desktop\PhpProject\Website\obj\Release\net6.0\PhpProject.pdb
+C:\Users\Kamil\Desktop\PhpProject\Website\bin\Release\net6.0\PhpProject.deps.json
+C:\Users\Kamil\Desktop\PhpProject\Website\bin\Release\net6.0\PhpProject.dll
+C:\Users\Kamil\Desktop\PhpProject\Website\bin\Release\net6.0\PhpProject.pdb

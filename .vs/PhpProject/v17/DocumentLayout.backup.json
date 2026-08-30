@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\website\\api\\classes\\components\\models\\search.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|solutionrelative:website\\api\\classes\\components\\models\\search.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\website\\api\\classes\\components\\models\\sort1s.php||{3B902123-F8A7-4915-9F01-361F908088D0}|",
+      "RelativeMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|solutionrelative:website\\api\\classes\\components\\models\\sort1s.php||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\website\\api\\classes\\components\\auth.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|solutionrelative:website\\api\\classes\\components\\auth.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\website\\api\\config.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|solutionrelative:website\\api\\config.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\website\\api\\global_mysqli.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A271793F-72BF-429D-9EC8-83C03559CBD6}|Website\\Website.msbuildproj|solutionrelative:website\\api\\global_mysqli.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF5D53C1-32B5-473F-9229-817608068701}|Server\\Server.csproj|c:\\users\\kamil\\downloads\\sort1local-main\\sort1local-main\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF5D53C1-32B5-473F-9229-817608068701}|Server\\Server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{73068c07-fba1-453f-99ae-6edf972119b2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Search.php",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Models\\Search.php",
+              "RelativeDocumentMoniker": "Website\\api\\classes\\Components\\Models\\Search.php",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Models\\Search.php",
+              "RelativeToolTip": "Website\\api\\classes\\Components\\Models\\Search.php",
+              "ViewState": "AgIAAI4IAAAAAAAAAAAWwJIIAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2026-05-28T20:52:24.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Sort1s.php",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Models\\Sort1s.php",
+              "RelativeDocumentMoniker": "Website\\api\\classes\\Components\\Models\\Sort1s.php",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Models\\Sort1s.php",
+              "RelativeToolTip": "Website\\api\\classes\\Components\\Models\\Sort1s.php",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAswHwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2026-05-28T20:13:47.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Auth.php",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Auth.php",
+              "RelativeDocumentMoniker": "Website\\api\\classes\\Components\\Auth.php",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\classes\\Components\\Auth.php",
+              "RelativeToolTip": "Website\\api\\classes\\Components\\Auth.php",
+              "ViewState": "AgIAAEoBAAAAAAAAAAAAAG0BAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2026-05-22T15:57:47.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "global_mysqli.php",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\global_mysqli.php",
+              "RelativeDocumentMoniker": "Website\\api\\global_mysqli.php",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\global_mysqli.php",
+              "RelativeToolTip": "Website\\api\\global_mysqli.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2026-05-22T07:39:04.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "Server\\Program.cs",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Server\\Program.cs",
+              "RelativeToolTip": "Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T07:13:21.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "config.php",
+              "DocumentMoniker": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\config.php",
+              "RelativeDocumentMoniker": "Website\\api\\config.php",
+              "ToolTip": "C:\\Users\\Kamil\\Downloads\\Sort1Local-main\\Sort1Local-main\\Website\\api\\config.php",
+              "RelativeToolTip": "Website\\api\\config.php",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2026-05-22T07:02:23.98Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

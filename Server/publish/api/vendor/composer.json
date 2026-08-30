@@ -1,0 +1,8 @@
+{
+    "require": {
+        "komtet/kassa-sdk": "^7.2",
+        "tecnickcom/tc-lib-barcode": "^1.15",
+        "maennchen/zipstream-php": "^3.1",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
